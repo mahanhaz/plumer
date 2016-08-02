@@ -1,0 +1,11 @@
+#!/bin/sh
+
+newMacEn0="$(openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//')"
+newMacEn1="$(openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//')"
+
+# change the host name
+hostname "$RANDOM-$RANDOM"
+
+#spoof the network cards
+ifconfig en0 ether ${newMacEn0}
+ifconfig en1 ether ${newMacEn1}
